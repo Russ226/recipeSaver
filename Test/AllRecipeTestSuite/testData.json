@@ -1,0 +1,93 @@
+{ "bakedChickenThighs": {
+    "title": "Crispy and Tender Baked Chicken Thighs",
+    "servings": "24",
+    "cookingTime": "1 hr",
+    "prepTime": "10 mins",
+    "totalTime": "1 hr 10 mins",
+    "ingredients": [
+      "cooking spray",
+      "8 bone-in chicken thighs with skin",
+      "¼ teaspoon garlic salt",
+      "¼ teaspoon onion salt",
+      "¼ teaspoon dried oregano",
+      "¼ teaspoon ground thyme",
+      "¼ teaspoon paprika",
+      "¼ teaspoon ground black pepper"
+    ],
+    "directions": [
+      "Preheat oven to 350 degrees F (175 degrees C). Line a baking sheet with aluminum foil and spray with cooking spray.",
+      "Arrange chicken thighs on prepared baking sheet",
+      "Combine garlic salt, onion salt, oregano, thyme, paprika, and pepper together in a small container with a lid. Close the lid and shake container until spices are thoroughly mixed. Sprinkle spice mixture liberally over chicken thighs.",
+      "Bake chicken in the preheated oven until skin is crispy, thighs are no longer pink at the bone, and the juices run clear, about 1 hour. An instant-read thermometer inserted near the bone should read 165 degrees F (74 degrees C)."
+    ],
+    "nutritionFacts": {
+      "servingsPerRecipe": "8",
+      "calories": "190",
+      "totalFat": "11.9",
+      "saturatedFat": "3.3",
+      "cholesterol": "71",
+      "sodium": "178",
+      "potassium": "174",
+      "carbohydrates": ".2",
+      "fiber": ".1",
+      "protein": "19.2",
+      "exchangeOtherCarbs": "0",
+      "sugar": "0",
+      "vitaminAIu": "169",
+      "niacinEquivalents": "8",
+      "vitaminB6": "0",
+      "vitaminC": "0",
+      "calcium": "11",
+      "iron": "1",
+      "magnesium": "17",
+      "folate": "6",
+      "thiamin": "0"
+      }
+    },
+    "chocolateChipCookies": {
+      "title": "Best Chocolate Chip Cookies",
+      "servings": 8,
+      "cookingTime": "PT10M",
+      "prepTime": "PT20M",
+      "totalTime": "PT1H",
+      "ingredients": [
+        "1 cup butter, softened",
+        "1 cup white sugar",
+        "1 cup packed brown sugar",
+        "2 eggs",
+        "2 teaspoons vanilla extract",
+        "1 teaspoon baking soda",
+        "2 teaspoons hot water",
+        "1/2 teaspoon salt",
+        "3 cups all-purpose flour",
+        "2 cups semisweet chocolate chips",
+        "1 cup chopped walnuts"
+      ],
+      "directions": [
+        "Preheat oven to 350 degrees F (175 degrees C).",
+        "Cream together the butter, white sugar, and brown sugar until smooth. Beat in the eggs one at a time, then stir in the vanilla. Dissolve baking soda in hot water. Add to batter along with salt. Stir in flour, chocolate chips, and nuts. Drop by large spoonfuls onto ungreased pans.",
+        "Bake for about 10 minutes in the preheated oven, or until edges are nicely browned."
+      ],
+      "nutritionFacts": {
+        "servingsPerRecipe": "8",
+        "calories": "292",
+        "TotalFat": "0.2",
+        "SaturatedFat": "0.0",
+        "Cholesterol": "0",
+        "Sodium": "5",
+        "Potassium": "134",
+        "TotalCarbohydrates": "61",
+        "DietaryFiber": "3.2",
+        "Protein": "0.5",
+        "Sugars": "54",
+        "VitaminA": "61",
+        "VitaminC": "7",
+        "Calcium": "30",
+        "Iron": "1",
+        "Thiamin": "0",
+        "Niacin": "0",
+        "VitaminB6": "0",
+        "Folate": "2"
+      }
+    }
+}
