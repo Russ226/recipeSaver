@@ -18,7 +18,7 @@ class AllRecipeParserTests(unittest.TestCase):
         recipeGet = requests.get('https://www.allrecipes.com/recipe/235151/crispy-and-tender-baked-chicken-thighs/', headers=headers)
         self.recipeSoup = BeautifulSoup(recipeGet.content, 'html.parser')
 
-        with open(os.path.join(os.path.dirname(__file__),'testData.json'), 'r') as testData:
+        with open(os.path.join(os.path.dirname(__file__),'allRecipeEachParseTestData.json'), 'r') as testData:
             testData = testData.read()
 
         self.testdata = json.loads(testData)["bakedChickenThighs"]

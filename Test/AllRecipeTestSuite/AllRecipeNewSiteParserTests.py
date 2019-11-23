@@ -19,7 +19,7 @@ class AllRecipeParserTests(unittest.TestCase):
         nutritionGet = requests.get('https://www.allrecipes.com/recipe/10813/best-chocolate-chip-cookies/fullrecipenutrition/', headers=headers)
         self.nutritionSoup = BeautifulSoup(nutritionGet.content, 'html.parser')
 
-        with open(os.path.join(os.path.dirname(__file__),'testData.json'), 'r') as testData:
+        with open(os.path.join(os.path.dirname(__file__),'allRecipeEachParseTestData.json'), 'r') as testData:
             testData = testData.read()
 
         self.testdata = json.loads(testData)["chocolateChipCookies"]

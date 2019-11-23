@@ -1,8 +1,19 @@
 import re
 from logging import Logger
-import datetime
+
 class AllRecipeFactory:
-    pass
+    def __init__(self, recipePage, nutritionPage):
+        self.recipePage = recipePage
+        self.nutritionPage = nutritionPage
+
+    def getAllRecipeParser(self):
+        if(self.recipePage.find('body').has_attr('ng-app')):
+            return AllRecipeParserNewSite(self.recipePage, self.nutritionPage)
+
+        if(self.recipePage.find('body').has_attr('data-add-slash')):
+            return AllRecipeParserOldSite(self.recipePage)
+
+        return None
 
 
 
@@ -71,7 +82,7 @@ class AllRecipeParserNewSite:
         if nutRows is not None or len(nutRows) < 1:
             try:
                 for nutRow in nutRows:
-                    key = nutRow.find('span', {'class': 'nutrient-name'}).text.split(':')[0]
+                    key = nutRow.find('span', {'class': 'nutrient-name'}).text.split(':')[0].lower()
                     value = nutRow.find('span', {'aria-label': re.compile(r".*")})['aria-label']
 
                     if key is not None and value is not None:
@@ -153,14 +164,15 @@ class AllRecipeParserOldSite:
         if nutRows is not None or len(nutRows) < 1:
             try:
                 for nutRow in nutRows:
-                    firstSection = nutRow.find('span', {'class': 'nutrient-name'}).text.split(':')[0].split(' ')
+                    firstSection = nutRow.find('span', {'class': 'nutrient-name'}).text.split(':')[0].lower().split(' ')
                     secondSection = ''.join(x.capitalize() for x in firstSection[1:])
-                    key = firstSection[0]+secondSection
+                    firstSection[0].lower()
+                    key = firstSection[0] + secondSection
                     value = re.split(r'([A-Za-z]+)' ,nutRow.find('span', {'aria-label': re.compile(r".*")})['aria-label'])
 
                     if key is not None and value is not None:
                         self.nutritionFacts[key] = value[:2]
-            except None as e:
+            except Exception as e:
                 Logger.debug(e)
 
         return
