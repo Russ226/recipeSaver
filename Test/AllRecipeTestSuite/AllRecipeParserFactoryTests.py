@@ -12,16 +12,6 @@ headers = {
     "user-agent": "ozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.149 Safari/537.36"
 }
 
-recipes = [["https://www.allrecipes.com/recipe/10549/best-brownies/?internalSource=previously%20viewed&referringContentType=Homepage&clickId=cardslot%203",
-                'https://www.allrecipes.com/recipe/10549/best-brownies/fullrecipenutrition/']
-           ,["https://www.allrecipes.com/recipe/10687/mrs-siggs-snickerdoodles/?internalSource=previously%20viewed&referringContentType=Homepage&clickId=cardslot%205",
-                'https://www.allrecipes.com/recipe/10687/mrs-siggs-snickerdoodles/fullrecipenutrition/']
-           ,["https://www.allrecipes.com/recipe/68532/curried-coconut-chicken/?internalSource=hub%20recipe&referringId=227&referringContentType=Recipe%20Hub&clickId=cardslot%207",
-                "https://www.allrecipes.com/recipe/68532/curried-coconut-chicken/fullrecipenutrition/"]
-           ,["https://www.allrecipes.com/recipe/91499/general-tsaos-chicken-ii/?internalSource=recipe%20hub&referringId=227&referringContentType=Recipe%20Hub&clickId=cardslot%2022",
-                "https://www.allrecipes.com/recipe/91499/general-tsaos-chicken-ii/fullrecipenutrition/"]
-           ]
-
 
 class AllRecipeParserFactoryTests(unittest.TestCase):
     recipes = [[
@@ -78,18 +68,22 @@ class AllRecipeParserFactoryTests(unittest.TestCase):
     def test_parse_ingredients(self):
         counter = 0
         for recipeParser in self.recipeParsers:
+            counter1 = 0
             for ing in recipeParser.ingredients:
-                self.assertTrue(ing in self.testdata[counter]["ingredients"], True)
+                if len(self.testdata[counter]["ingredients"]) < counter1:
+                    self.assertTrue(self.testdata[counter]["ingredients"][counter1], ing)
+                counter1 += 1
 
-            counter+=1
+            counter += 1
 
     def test_parse_directions(self):
         counter = 0
         for recipeParser in self.recipeParsers:
             counter1 =0
             for dire in recipeParser.directions:
-                self.assertTrue(dire,  self.testdata[counter]["directions"][counter])
-                counter1+=1
+
+                self.assertTrue(dire,  self.testdata[counter]["directions"][counter1])
+                counter1 += 1
 
             counter += 1
 
@@ -110,7 +104,6 @@ class AllRecipeParserFactoryTests(unittest.TestCase):
         counter = 0
         for recipeParser in self.recipeParsers:
             for key, amount in self.testdata[counter]["nutritionFacts"].items():
-                test= recipeParser.nutritionFacts[key]
                 self.assertTrue(recipeParser.nutritionFacts[key][0], amount)
 
             counter += 1

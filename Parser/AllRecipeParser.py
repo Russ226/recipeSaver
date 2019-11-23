@@ -82,13 +82,14 @@ class AllRecipeParserNewSite:
         if nutRows is not None or len(nutRows) < 1:
             try:
                 for nutRow in nutRows:
-                    key = nutRow.find('span', {'class': 'nutrient-name'}).text.split(':')[0].lower()
+                    key = nutRow.find('span', {'class': 'nutrient-name'}).text.split(':')[0]
+                    key = key[0].lower() +key[1:]
                     value = nutRow.find('span', {'aria-label': re.compile(r".*")})['aria-label']
 
                     if key is not None and value is not None:
                         self.nutritionFacts[key.replace(' ', '')] = value.split(' ')
-            except None as e:
-                Logger.debug(e)
+            except TypeError as err:
+                print(err)
 
         return
 
@@ -166,7 +167,7 @@ class AllRecipeParserOldSite:
                 for nutRow in nutRows:
                     firstSection = nutRow.find('span', {'class': 'nutrient-name'}).text.split(':')[0].lower().split(' ')
                     secondSection = ''.join(x.capitalize() for x in firstSection[1:])
-                    firstSection[0].lower()
+                    firstSection[0]
                     key = firstSection[0] + secondSection
                     value = re.split(r'([A-Za-z]+)' ,nutRow.find('span', {'aria-label': re.compile(r".*")})['aria-label'])
 

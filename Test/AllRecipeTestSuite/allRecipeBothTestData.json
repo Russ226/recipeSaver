@@ -45,7 +45,7 @@
       "niacin": "1",
       "vitaminB6": "0",
       "magnesium": "16",
-      "Folate": "11"
+      "folate": "11"
       }
   },
    {
@@ -183,7 +183,7 @@
       "saturatedFat": "6.1",
       "cholesterol": "101",
       "sodium": "1192",
-      "Potassium": "530",
+      "potassium": "530",
       "carbohydrates": "54.9",
       "fiber": "0.8",
       "sugar": "18",
