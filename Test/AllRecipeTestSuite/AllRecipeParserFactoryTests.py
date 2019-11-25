@@ -12,21 +12,18 @@ headers = {
     "user-agent": "ozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.149 Safari/537.36"
 }
 
+recipes = [["https://www.allrecipes.com/recipe/10549/best-brownies/?internalSource=previously%20viewed&referringContentType=Homepage&clickId=cardslot%203",
+                'https://www.allrecipes.com/recipe/10549/best-brownies/fullrecipenutrition/']
+           ,["https://www.allrecipes.com/recipe/10687/mrs-siggs-snickerdoodles/?internalSource=previously%20viewed&referringContentType=Homepage&clickId=cardslot%205",
+                'https://www.allrecipes.com/recipe/10687/mrs-siggs-snickerdoodles/fullrecipenutrition/']
+           ,["https://www.allrecipes.com/recipe/68532/curried-coconut-chicken/?internalSource=hub%20recipe&referringId=227&referringContentType=Recipe%20Hub&clickId=cardslot%207",
+                "https://www.allrecipes.com/recipe/68532/curried-coconut-chicken/fullrecipenutrition/"]
+           ,["https://www.allrecipes.com/recipe/91499/general-tsaos-chicken-ii/?internalSource=recipe%20hub&referringId=227&referringContentType=Recipe%20Hub&clickId=cardslot%2022",
+                "https://www.allrecipes.com/recipe/91499/general-tsaos-chicken-ii/fullrecipenutrition/"]
+           ]
+
 
 class AllRecipeParserFactoryTests(unittest.TestCase):
-    recipes = [[
-                   "https://www.allrecipes.com/recipe/10549/best-brownies/?internalSource=previously%20viewed&referringContentType=Homepage&clickId=cardslot%203",
-                   'https://www.allrecipes.com/recipe/10549/best-brownies/fullrecipenutrition/']
-        , [
-                   "https://www.allrecipes.com/recipe/10687/mrs-siggs-snickerdoodles/?internalSource=previously%20viewed&referringContentType=Homepage&clickId=cardslot%205",
-                   'https://www.allrecipes.com/recipe/10687/mrs-siggs-snickerdoodles/fullrecipenutrition/']
-        , [
-                   "https://www.allrecipes.com/recipe/68532/curried-coconut-chicken/?internalSource=hub%20recipe&referringId=227&referringContentType=Recipe%20Hub&clickId=cardslot%207",
-                   "https://www.allrecipes.com/recipe/68532/curried-coconut-chicken/fullrecipenutrition/"]
-        , [
-                   "https://www.allrecipes.com/recipe/91499/general-tsaos-chicken-ii/?internalSource=recipe%20hub&referringId=227&referringContentType=Recipe%20Hub&clickId=cardslot%2022",
-                   "https://www.allrecipes.com/recipe/91499/general-tsaos-chicken-ii/fullrecipenutrition/"]
-               ]
 
     def setUp(self):
         recipeSoups = []
@@ -52,7 +49,7 @@ class AllRecipeParserFactoryTests(unittest.TestCase):
                 self.stop()
             time.sleep(1)
 
-        with open(os.path.join(os.path.dirname(__file__),'allRecipeBothTestData.json'), 'r') as testData:
+        with open(os.path.join(os.path.dirname(__file__),'TestData/allRecipeBothTestData.json'), 'r') as testData:
             testData = testData.read()
 
         self.testdata = json.loads(testData)
@@ -107,3 +104,6 @@ class AllRecipeParserFactoryTests(unittest.TestCase):
                 self.assertTrue(recipeParser.nutritionFacts[key][0], amount)
 
             counter += 1
+
+if __name__ == '__main__':
+    unittest.main()

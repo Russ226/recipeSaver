@@ -10,7 +10,7 @@ headers = {
 }
 
 
-class AllRecipeParserTests(unittest.TestCase):
+class AllRecipeNewSiteParserTests(unittest.TestCase):
 
     def setUp(self):
         recipeGet = requests.get('https://www.allrecipes.com/recipe/10813/best-chocolate-chip-cookies/', headers=headers)
@@ -19,7 +19,7 @@ class AllRecipeParserTests(unittest.TestCase):
         nutritionGet = requests.get('https://www.allrecipes.com/recipe/10813/best-chocolate-chip-cookies/fullrecipenutrition/', headers=headers)
         self.nutritionSoup = BeautifulSoup(nutritionGet.content, 'html.parser')
 
-        with open(os.path.join(os.path.dirname(__file__),'allRecipeEachParseTestData.json'), 'r') as testData:
+        with open(os.path.join(os.path.dirname(__file__),'TestData/allRecipeEachParseTestData.json'), 'r') as testData:
             testData = testData.read()
 
         self.testdata = json.loads(testData)["chocolateChipCookies"]
@@ -47,3 +47,8 @@ class AllRecipeParserTests(unittest.TestCase):
     def test_nutrition_content(self):
         for key, amount in self.testdata["nutritionFacts"].items():
             self.assertTrue(self.recipeParser.nutritionFacts[key][0], amount)
+
+
+
+if __name__ == '__main__':
+    unittest.main()

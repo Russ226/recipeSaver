@@ -12,13 +12,13 @@ headers = {
 }
 
 
-class AllRecipeParserTests(unittest.TestCase):
+class AllRecipeOldSiteParserTests(unittest.TestCase):
 
     def setUp(self):
         recipeGet = requests.get('https://www.allrecipes.com/recipe/235151/crispy-and-tender-baked-chicken-thighs/', headers=headers)
         self.recipeSoup = BeautifulSoup(recipeGet.content, 'html.parser')
 
-        with open(os.path.join(os.path.dirname(__file__),'allRecipeEachParseTestData.json'), 'r') as testData:
+        with open(os.path.join(os.path.dirname(__file__),'TestData/allRecipeEachParseTestData.json'), 'r') as testData:
             testData = testData.read()
 
         self.testdata = json.loads(testData)["bakedChickenThighs"]
@@ -54,9 +54,12 @@ class AllRecipeParserTests(unittest.TestCase):
 
         for key, amount in self.testdata["nutritionFacts"].items():
             try:
-                nutritionexists = filter(key , self.recipeParser.nutritionFacts)
+                nutritionexists = filter(key, self.recipeParser.nutritionFacts)
                 self.assertTrue(nutritionexists, True)
                 self.assertTrue(self.recipeParser.nutritionFacts[key][0], amount)
             except AssertionError as err:
                 logger.exception(f'My assert failed :({err}) \n ing = {key} {amount}')
                 raise err
+
+if __name__ == '__main__':
+    unittest.main()
