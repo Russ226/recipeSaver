@@ -19,6 +19,16 @@ class DbReader:
             print(err)
             self.connection.rollback()
             return
+    def readToDb(self, sqlStatement, params):
+        try:
+            with self.connection.cursor() as cursor:
+                cursor.execute(sqlStatement, params)
+                return cursor.fetchall()
+
+        except pymysql.Error as err:
+            print(err)
+            self.connection.rollback()
+            return
 
 
     def __exit__(self, exc_type, exc_val, exc_tb):
