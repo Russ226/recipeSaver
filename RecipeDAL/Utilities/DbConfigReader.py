@@ -17,4 +17,5 @@ class DbConfigReader:
             'cursorclass' : section['cursorclass']
         }
 
+
         return dbConfigs

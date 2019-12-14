@@ -13,7 +13,7 @@ class ConfigReaderTest(unittest.TestCase):
         self.testData = json.loads(testData)
 
     def test_reader(self):
-        configReader =  DbConfigReader("configTest.ini")
+        configReader = DbConfigReader("configTest.ini")
 
         settings = configReader.retrieveConnectionSetting()
 

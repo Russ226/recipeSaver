@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS RecipeDb.recipes(
   prepTime VARCHAR(255),
   totalTime VARCHAR(255),
   created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY(id),
-  UNIQUE KEY user(title)
+  PRIMARY KEY(id)
+  
 );
 
 CREATE TABLE IF NOT EXISTS RecipeDb.ingredients(

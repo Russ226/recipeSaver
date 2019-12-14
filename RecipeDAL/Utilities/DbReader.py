@@ -19,6 +19,7 @@ class DbReader:
             print(err)
             self.connection.rollback()
             return
+
     def readToDb(self, sqlStatement, params):
         try:
             with self.connection.cursor() as cursor:
