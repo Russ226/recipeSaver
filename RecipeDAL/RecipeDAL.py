@@ -1,4 +1,6 @@
 import pymysql.cursors
+
+from RecipeDAL.Utilities.Exceptions.RecipeDalError import RecipeDalError
 from .Utilities import StoredProcs
 
 class RecipeDAL:
@@ -21,7 +23,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise Exception(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
 
         finally:
             sqlConnection.close()
@@ -44,7 +46,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise Exception(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new ingredient {e}')
 
         finally:
             sqlConnection.close()
@@ -66,7 +68,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise Exception(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new direction {e}')
 
         finally:
             sqlConnection.close()
@@ -90,7 +92,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise Exception(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new nutrition fact {e}')
 
         finally:
             sqlConnection.close()
