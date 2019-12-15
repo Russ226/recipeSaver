@@ -98,3 +98,16 @@ class RecipeDAL:
             sqlConnection.close()
 
         return
+
+    def saveNewRecipe(self, newRecipe):
+
+        # save general info
+
+        # save ingredients
+
+        # save directions
+
+        # save nutrition facts
+
+        return True
+
