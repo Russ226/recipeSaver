@@ -9,6 +9,7 @@ class AllRecipePageRequestor(PageRequestor.PageRequestor):
     def parseAllRecipe(self):
         allRecipePages = {}
 
+        allRecipePages['recipeWebsiteName'] = 'allRecipe'
         allRecipePages['recipePage'] = self.createSoupObj(self.recipeUrl)
         allRecipePages['nutritionPage'] = self.createSoupObj(self.nutritionUrl)
 
