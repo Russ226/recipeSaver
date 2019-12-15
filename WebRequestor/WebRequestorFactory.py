@@ -10,5 +10,6 @@ class WebRequestorFactory:
 
 
     def requestSoupPage(self):
-        if self.netloc == 'allRecipes':
-            return AllRecipePageRequestor(self.url)
+        if self.netloc == 'www.allrecipes.com':
+            allRecipepages = AllRecipePageRequestor.AllRecipePageRequestor(self.url)
+            return allRecipepages.parseAllRecipe()
