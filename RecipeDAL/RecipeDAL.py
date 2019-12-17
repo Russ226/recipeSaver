@@ -1,5 +1,6 @@
 import pymysql.cursors
 
+from RecipeDAL.Utilities.Exceptions.InvalidRecipeSchema import InvalidRecipeSchema
 from RecipeDAL.Utilities.Exceptions.RecipeDalError import RecipeDalError
 from .Utilities import StoredProcs
 
@@ -76,7 +77,7 @@ class RecipeDAL:
         return
 
 
-    def saveNewRecipeNutritionFact(self, nutritionFact, recipeId = None, recipeTitle = None):
+    def saveNewRecipeNutritionFact(self, nutritionName, nutritionAmount, nutritionUnit,recipeId = None, recipeTitle = None):
 
         if recipeId is None and recipeTitle is None:
             raise TypeError('recipeId and recipeTile cannot be None please provide one or the other')
@@ -85,8 +86,8 @@ class RecipeDAL:
             sqlConnection = pymysql.connect(**self.dbConfig)
 
             with sqlConnection.cursor() as cursor:
-                cursor.execute(StoredProcs.saveNutitionProc(), (nutritionFact['name'], nutritionFact['amount'],
-                                                                nutritionFact['unit'], recipeId, recipeTitle))
+                cursor.execute(StoredProcs.saveNutitionProc(), (nutritionName, nutritionAmount,
+                                                                nutritionUnit, recipeId, recipeTitle))
 
             sqlConnection.commit()
 
@@ -102,12 +103,30 @@ class RecipeDAL:
     def saveNewRecipe(self, newRecipe):
 
         # save general info
+        self.saveNewRecipeGeneralInfo(newRecipe)
 
         # save ingredients
+        for ingredient in newRecipe['ingredients']:
+            self.saveNewRecipeIngredient(ingredient, None, newRecipe['recipeTitle'])
 
         # save directions
 
-        # save nutrition facts
+        for index, direction in enumerate(['directions']):
+            if not direction:
+                raise InvalidRecipeSchema(f'invalid direction for recipe:{newRecipe["recipeTitle"]} ,empty direction text')
+            self.saveNewRecipeDirection(index, direction, None, newRecipe['recipeTitle'])
 
-        return True
+        # save nutrition facts
+        for nutritionFact in newRecipe['nutritionFacts']:
+            nutritionName = nutritionFact[nutritionFact.keys()[0]]
+            if len(nutritionName) == 1:
+                self.saveNewRecipeNutritionFact(nutritionFact, nutritionFact[nutritionFact][0], nutritionFact[nutritionFact][1], None, newRecipe['recipeTitle'])
+
+            elif len(nutritionName) == 2:
+                self.saveNewRecipeNutritionFact(nutritionFact, nutritionFact[nutritionFact][0], None, None, newRecipe['recipeTitle'])
+
+            else:
+                raise InvalidRecipeSchema(f'invalid nutrition for recipe:{newRecipe["recipeTitle"]} insertion with the name {nutritionName}, must have a amount and unit instead got: [{nutritionFact[nutritionFact]}]')
+
+        return
 

@@ -11,7 +11,12 @@ BEGIN
         where title = recipeTitle LIMIT 1 INTO recipeId;
 	END IF;
     
-    INSERT INTO nutrition(recipe_id, nutrientName, amount, unit)
-    VALUES(recipeId, Nname, amount, unit);
+  IF unit IS NULL then
+		INSERT INTO nutrition(recipe_id, nutrientName, amount)
+		VALUES(recipeId, Nname, amount);
+	ELSE
+		INSERT INTO nutrition(recipe_id, nutrientName, amount, unit)
+		VALUES(recipeId, Nname, amount, unit);
+	END IF;
 
 END
