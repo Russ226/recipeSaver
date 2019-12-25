@@ -2,9 +2,9 @@ from RecipeDAL.Utilities.Exceptions.RecipeDalError import RecipeDalError
 
 
 class RecipeSaveService:
-    def __init__(self, recipeDAL, recipeParser):
-        self.recipeDAL = recipeDAL
-        self.recipeParser = recipeParser
+    def __init__(self, recipeSaverDAL, recipeParserFactory):
+        self.recipeSaverDAL = recipeSaverDAL
+        self.recipeParserFactory = recipeParserFactory
 
 
     def saveRecipe(self, recipeSoupObj):
@@ -13,21 +13,19 @@ class RecipeSaveService:
             'errorMessage': '',
             'newRecipe': None
         }
+
         ## parse recipe page
-        newRecipe = self.recipeParser.parseRecipePage(recipeSoupObj)
+        newRecipe = self.recipeParserFactory.parseRecipePage(recipeSoupObj)
 
         ## save recipe in db
-
         try:
-            self.recipeDAL.saveNewRecipe(newRecipe)
-            returnMessage['newRecipe'] = newRecipe
+            self.recipeSaverDAL.saveNewRecipe(newRecipe)
 
-            return
-
-        except RecipeDalError as dalError:
+        except Exception as e:
             returnMessage['isError'] = True
-            returnMessage['errorMessage'] = dalError
+            returnMessage['errorMessage'] = e
 
         finally:
+            returnMessage['newRecipe'] = newRecipe
             return returnMessage
 

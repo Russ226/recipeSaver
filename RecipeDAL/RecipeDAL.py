@@ -10,7 +10,7 @@ class RecipeDAL:
         self.dbConfig["cursorclass"] = pymysql.cursors.DictCursor
 
 
-
+    ## insert methods
 
     def saveNewRecipeGeneralInfo(self, recipe):
 
@@ -35,7 +35,7 @@ class RecipeDAL:
     def saveNewRecipeIngredient(self, ingredient, recipeId = None, recipeTitle = None):
 
         if recipeId is None and recipeTitle is None:
-            raise TypeError('recipeId and recipeTile cannot be None please provide one or the other')
+            raise InvalidRecipeSchema('recipeId and recipeTile cannot be None please provide one or the other')
 
         try:
             sqlConnection = pymysql.connect(**self.dbConfig)
@@ -57,7 +57,7 @@ class RecipeDAL:
     def saveNewRecipeDirection(self, directionStepNumber, directionText, recipeId = None, recipeTitle = None):
 
         if recipeId is None and recipeTitle is None:
-            raise TypeError('recipeId and recipeTile cannot be None please provide one or the other')
+            raise InvalidRecipeSchema('recipeId and recipeTile cannot be None please provide one or the other')
 
         try:
             sqlConnection = pymysql.connect(**self.dbConfig)
@@ -80,7 +80,7 @@ class RecipeDAL:
     def saveNewRecipeNutritionFact(self, nutritionName, nutritionAmount, nutritionUnit,recipeId = None, recipeTitle = None):
 
         if recipeId is None and recipeTitle is None:
-            raise TypeError('recipeId and recipeTile cannot be None please provide one or the other')
+            raise InvalidRecipeSchema('recipeId and recipeTile cannot be None please provide one or the other')
 
         try:
             sqlConnection = pymysql.connect(**self.dbConfig)
@@ -130,3 +130,4 @@ class RecipeDAL:
 
         return
 
+    ## get methods
