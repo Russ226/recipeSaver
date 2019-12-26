@@ -2,16 +2,13 @@ import re
 from logging import Logger
 
 class AllRecipeFactory:
-    def __init__(self, recipePage, nutritionPage):
-        self.recipePage = recipePage
-        self.nutritionPage = nutritionPage
 
-    def getAllRecipeParser(self):
-        if(self.recipePage.find('body').has_attr('ng-app')):
-            return AllRecipeParserNewSite(self.recipePage, self.nutritionPage)
+    def getAllRecipeParser(self, recipePage, nutritionPage):
+        if(recipePage.find('body').has_attr('ng-app')):
+            return AllRecipeParserNewSite(recipePage, nutritionPage)
 
-        if(self.recipePage.find('body').has_attr('data-add-slash')):
-            return AllRecipeParserOldSite(self.recipePage)
+        if(recipePage.find('body').has_attr('data-add-slash')):
+            return AllRecipeParserOldSite(recipePage)
 
         return None
 

@@ -15,12 +15,11 @@ class RecipeSaverService:
             'newRecipe': None
         }
 
-
-
+        newRecipe = None
 
         try:
             ## create soup obj from url
-            recipeSoupObj = self.recipeParserFactory.requestSoupPage(url)
+            recipeSoupObj = self.webRequestorFactory.requestSoupPage(url)
 
             ## parse recipe page
             newRecipe = self.recipeParserFactory.parseRecipePage(recipeSoupObj)

@@ -6,6 +6,6 @@ class ParserFactory:
 
     def parseRecipePage(self, recipePage):
         if recipePage['recipeWebsiteName']is 'allRecipe':
-            allRecipeParser = AllRecipeParser.AllRecipeFactory(recipePage['recipePage'], recipePage)
+            allRecipeParser = AllRecipeParser.AllRecipeFactory()
 
-            return allRecipeParser
+            return allRecipeParser.getAllRecipeParser(recipePage['recipePage'], recipePage['nutritionPage'])
