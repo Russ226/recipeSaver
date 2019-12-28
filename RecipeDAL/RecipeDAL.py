@@ -41,7 +41,7 @@ class RecipeDAL:
             sqlConnection = pymysql.connect(**self.dbConfig)
 
             with sqlConnection.cursor() as cursor:
-                cursor.execute(StoredProcs.saveIngredientProc, (ingredient, recipeId, recipeTitle))
+                cursor.execute(StoredProcs.saveIngredientProc(), (ingredient, recipeId, recipeTitle))
 
             sqlConnection.commit()
 
@@ -111,22 +111,22 @@ class RecipeDAL:
 
         # save directions
 
-        for index, direction in enumerate(['directions']):
+        for index, direction in enumerate(newRecipe['directions']):
             if not direction:
                 raise InvalidRecipeSchema(f'invalid direction for recipe:{newRecipe["recipeTitle"]} ,empty direction text')
             self.saveNewRecipeDirection(index, direction, None, newRecipe['recipeTitle'])
 
         # save nutrition facts
-        for nutritionFact in newRecipe['nutritionFacts']:
-            nutritionName = nutritionFact[nutritionFact.keys()[0]]
-            if len(nutritionName) == 1:
-                self.saveNewRecipeNutritionFact(nutritionFact, nutritionFact[nutritionFact][0], nutritionFact[nutritionFact][1], None, newRecipe['recipeTitle'])
+        for nutritionName, nutritionAmount in newRecipe['nutritionFacts'].items():
 
-            elif len(nutritionName) == 2:
-                self.saveNewRecipeNutritionFact(nutritionFact, nutritionFact[nutritionFact][0], None, None, newRecipe['recipeTitle'])
+            if type(nutritionAmount) is list:
+                self.saveNewRecipeNutritionFact(nutritionName, nutritionAmount[0], nutritionAmount[1], None, newRecipe['recipeTitle'])
+
+            elif type(nutritionAmount) is str:
+                self.saveNewRecipeNutritionFact(nutritionName, nutritionAmount, None, None, newRecipe['recipeTitle'])
 
             else:
-                raise InvalidRecipeSchema(f'invalid nutrition for recipe:{newRecipe["recipeTitle"]} insertion with the name {nutritionName}, must have a amount and unit instead got: [{nutritionFact[nutritionFact]}]')
+                raise InvalidRecipeSchema(f'invalid nutrition for recipe:{newRecipe["recipeTitle"]} insertion with the name {nutritionName}, must have a amount and unit instead got: [{nutritionAmount}]')
 
         return
 
