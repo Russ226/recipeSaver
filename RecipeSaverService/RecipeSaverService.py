@@ -12,7 +12,7 @@ class RecipeSaverService:
         returnMessage = {
             'isError': False,
             'errorMessage': '',
-            'newRecipe': None
+            'recipe': None
         }
 
         newRecipe = None
@@ -32,6 +32,28 @@ class RecipeSaverService:
             returnMessage['errorMessage'] = e
 
         finally:
-            returnMessage['newRecipe'] = newRecipe
+            returnMessage['recipe'] = newRecipe
             return returnMessage
+
+
+    def getfullRecipeById(self, id):
+        returnMessage = {
+            'isError': False,
+            'errorMessage': '',
+            'recipe': None
+        }
+
+        recipe = None
+        try:
+            self.recipeSaverDAL.getFullRecipeByTitle(id)
+
+        except Exception as e:
+            returnMessage['isError'] = True
+            returnMessage['errorMessage'] = e
+
+        finally:
+            returnMessage['recipe'] = recipe
+            return returnMessage
+
+
 
