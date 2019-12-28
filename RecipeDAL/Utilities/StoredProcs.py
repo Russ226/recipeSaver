@@ -50,4 +50,4 @@ def getIngredientForRecipeProc():
 #params
 #recipeId
 def getDirectionsForRecipeProc():
-    return 'call up_getDirectionForRecipe(%s)'
+    return 'call up_getDirectionsForRecipe(%s)'

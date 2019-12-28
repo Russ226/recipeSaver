@@ -131,3 +131,87 @@ class RecipeDAL:
         return
 
     ## get methods
+    def getRecipeGeneralByTitle(self, recipeTitle):
+
+        result = None
+        try:
+            sqlConnection = pymysql.connect(**self.dbConfig)
+            with sqlConnection.cursor() as cursor:
+                cursor.execute(StoredProcs.getRecipeByTitleProc(), (recipeTitle))
+                result = cursor.fetchone()
+
+        except Exception as e:
+            sqlConnection.rollback()
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+
+        finally:
+            sqlConnection.close()
+            return result
+
+
+    def getRecipeIngredientsByRecipeId(self, recipeId):
+
+        result = None
+        try:
+            sqlConnection = pymysql.connect(**self.dbConfig)
+            with sqlConnection.cursor() as cursor:
+                cursor.execute(StoredProcs.getIngredientForRecipeProc(), (recipeId))
+                result = cursor.fetchall()
+
+        except Exception as e:
+            sqlConnection.rollback()
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+
+        finally:
+            sqlConnection.close()
+            return result
+
+
+    def getRecipeDirectionsByRecipeId(self, recipeId):
+
+        result = None
+        try:
+            sqlConnection = pymysql.connect(**self.dbConfig)
+            with sqlConnection.cursor() as cursor:
+                cursor.execute(StoredProcs.getDirectionsForRecipeProc(), (recipeId))
+                result = cursor.fetchall()
+
+        except Exception as e:
+            sqlConnection.rollback()
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+
+        finally:
+            sqlConnection.close()
+            return result
+
+
+    def getRecipeNutritionalFactsByRecipeId(self, recipeId):
+
+        result = None
+        try:
+            sqlConnection = pymysql.connect(**self.dbConfig)
+            with sqlConnection.cursor() as cursor:
+                cursor.execute(StoredProcs.getNutritionForRecipeProc(), (recipeId))
+                result = cursor.fetchall()
+
+        except Exception as e:
+            sqlConnection.rollback()
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+
+        finally:
+            sqlConnection.close()
+            return result
+
+
+    def getFullRecipeByTitle(self, recipeTitle):
+        recipe = None
+
+        recipe = self.getRecipeGeneralByTitle(recipeTitle)
+
+        recipe['ingredients'] = self.getRecipeIngredientsByRecipeId(recipe['id'])
+
+        recipe['directions'] = self.getRecipeDirectionsByRecipeId(recipe['id'])
+
+        recipe['nutritionFacts'] = self.getRecipeNutritionalFactsByRecipeId(recipe['id'])
+
+        return recipe

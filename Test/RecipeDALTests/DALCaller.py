@@ -19,11 +19,43 @@ class DALRunner:
         self.config = json.loads(config)
         self.config["cursorclass"] = pymysql.cursors.DictCursor
 
-def main():
+def saveRecipe():
     dalRunner = DALRunner()
     recipeSaver = RecipeDAL(**dalRunner.config)
 
     recipeSaver.saveNewRecipe(dalRunner.testData["chocolateChipCookies"])
+
+def getGeneralInfo():
+    dalRunner = DALRunner()
+    recipeSaver = RecipeDAL(**dalRunner.config)
+
+    result = recipeSaver.getRecipeGeneralByTitle("Best Chocolate Chip Cookies")
+    print(result)
+
+def getIngredients():
+    dalRunner = DALRunner()
+    recipeSaver = RecipeDAL(**dalRunner.config)
+
+    result = recipeSaver.getRecipeIngredientsByRecipeId(20)
+    print(result)
+
+def getDirections():
+    dalRunner = DALRunner()
+    recipeSaver = RecipeDAL(**dalRunner.config)
+
+    result = recipeSaver.getRecipeDirectionsByRecipeId(20)
+    print(result)
+
+def getFullRecipe():
+    dalRunner = DALRunner()
+    recipeSaver = RecipeDAL(**dalRunner.config)
+
+    result = recipeSaver.getFullRecipeByTitle("Best Chocolate Chip Cookies")
+    print(result)
+
+
+def main():
+    getFullRecipe()
 
 
 if __name__ == '__main__':

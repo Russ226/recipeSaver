@@ -1,4 +1,4 @@
-CREATE PROCEDURE `up_saveDirection` (
+CREATE DEFINER=`root`@`localhost` PROCEDURE `up_saveDirection`(
 	IN stepNumber INT,
     IN direction TEXT,
     IN recipeId INT,
