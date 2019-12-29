@@ -34,7 +34,9 @@ class RecipeSaverService:
             returnMessage['errorMessage'] = e
 
         finally:
-            returnMessage['recipe'] = json.dumps(newRecipe.__dict__, cls=type(self))
+
+            returnMessage['recipe'] = json.loads(json.dumps(newRecipe, default=lambda o: o.__dict__, sort_keys=True))
+
             return returnMessage
 
 
@@ -47,7 +49,7 @@ class RecipeSaverService:
 
         recipe = None
         try:
-            recipe = self.recipeSaverDAL.getFullRecipeByTitle(recipeTitle)
+            recipe = self.recipeSaverDAL.getFullRecipeByTitle(recipeTitle.__dict__)
 
         except Exception as e:
             returnMessage['isError'] = True
