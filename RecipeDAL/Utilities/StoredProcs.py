@@ -51,3 +51,8 @@ def getIngredientForRecipeProc():
 #recipeId
 def getDirectionsForRecipeProc():
     return 'call up_getDirectionsForRecipe(%s)'
+
+#params
+# recipe title
+def getSearchByRecipeTitleProc():
+    return 'call up_searchForRecipeByTitle(%s)'

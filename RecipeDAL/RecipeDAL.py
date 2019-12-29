@@ -217,3 +217,20 @@ class RecipeDAL:
         recipe['nutritionFacts'] = self.getRecipeNutritionalFactsByRecipeId(recipe['id'])
 
         return recipe
+
+
+    def searchRecipeByTitle(self, recipeTitle):
+        result = None
+        try:
+            sqlConnection = pymysql.connect(**self.dbConfig)
+            with sqlConnection.cursor() as cursor:
+                cursor.execute(StoredProcs.getSearchByRecipeTitleProc(), (recipeTitle))
+                result = cursor.fetchall()
+
+        except Exception as e:
+            sqlConnection.rollback()
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+
+        finally:
+            sqlConnection.close()
+            return result
