@@ -34,7 +34,7 @@ class RecipeSaverService:
             returnMessage['errorMessage'] = e
 
         finally:
-            returnMessage['recipe'] = json.dumps(newRecipe.__dict__)
+            returnMessage['recipe'] = json.dumps(newRecipe.__dict__, cls=type(self))
             return returnMessage
 
 

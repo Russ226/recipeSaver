@@ -1,3 +1,4 @@
+import json
 import re
 from logging import Logger
 
@@ -16,17 +17,15 @@ class AllRecipeFactory:
 
 class AllRecipeParserNewSite:
     def __init__(self, recipePage, nutritionPage):
-        self.nutritionPage = nutritionPage
-        self.recipePage = recipePage
-        self.ingredients = self.parseIngredients()
-        self.directions = self.parseDirections()
-        self.parseNutritionFacts()
-        self.parseGeneralInfo()
+        self.ingredients = self.parseIngredients(recipePage)
+        self.directions = self.parseDirections(recipePage)
+        self.parseNutritionFacts(recipePage, nutritionPage)
+        self.parseGeneralInfo(recipePage)
 
 
-    def parseIngredients(self):
+    def parseIngredients(self,recipePage):
         ingredients = []
-        ingredientCol = self.recipePage.findAll('ul', {'class': 'dropdownwrapper'})
+        ingredientCol = recipePage.findAll('ul', {'class': 'dropdownwrapper'})
 
         for col in ingredientCol:
             rows = col.findAll('li',{'class':'checkList__line'})
@@ -38,20 +37,20 @@ class AllRecipeParserNewSite:
         return ingredients
 
     # gets total cook time ,prep time, coke time, title
-    def parseGeneralInfo(self):
-        self.title = self.recipePage.find('h1', {'id': 'recipe-main-content'}).text # title
-        timeToMake = self.recipePage.find('ul', {'class': 'prepTime'})
+    def parseGeneralInfo(self, recipePage):
+        self.title = recipePage.find('h1', {'id': 'recipe-main-content'}).text # title
+        timeToMake = recipePage.find('ul', {'class': 'prepTime'})
 
-        self.cookTime =  timeToMake.find('time', {'itemprop': 'prepTime'})['datetime'] if timeToMake.find('time', {'itemprop': 'prepTime'}) is not None else None
+        self.cookTime = timeToMake.find('time', {'itemprop': 'prepTime'})['datetime'] if timeToMake.find('time', {'itemprop': 'prepTime'}) is not None else None
         self.prepTime = timeToMake.find('time', {'itemprop': 'cookTime'})['datetime'] if timeToMake.find('time', {'itemprop': 'cookTime'}) is not None else None
         self.totalTime = timeToMake.find('time', {'itemprop': 'totalTime'})['datetime'] if timeToMake.find('time', {'itemprop': 'totalTime'}) is not None else None
 
         return
 
-    def parseDirections(self):
+    def parseDirections(self, recipePage):
         directions = []
 
-        dirList = self.recipePage.findAll('ol', {'class': 'recipe-directions__list'})[0].findAll('li')
+        dirList = recipePage.findAll('ol', {'class': 'recipe-directions__list'})[0].findAll('li')
 
         for dire in dirList:
 
@@ -63,15 +62,15 @@ class AllRecipeParserNewSite:
         return directions
 
 
-    def parseNutritionFacts(self):
+    def parseNutritionFacts(self,recipePage, nutritionPage):
         self.nutritionFacts = {}
 
-        if self.nutritionPage is None:
+        if nutritionPage is None:
              return
 
-        nutRows = self.nutritionPage.findAll('div',{'class':'nutrition-row'})
+        nutRows = nutritionPage.findAll('div',{'class':'nutrition-row'})
 
-        caloriesAndServings = self.nutritionPage.find('div', {'class': 'nutrition-top'}).text.replace('\n', ' ').split(':')
+        caloriesAndServings = nutritionPage.find('div', {'class': 'nutrition-top'}).text.replace('\n', ' ').split(':')
 
         self.nutritionFacts['servingsPerRecipe'] = caloriesAndServings[1].split(' ')[1]
         self.nutritionFacts['calories'] = caloriesAndServings[2]
@@ -97,15 +96,14 @@ class AllRecipeParserNewSite:
 
 class AllRecipeParserOldSite:
     def __init__(self, recipePage):
-        self.recipePage = recipePage
-        self.ingredients = self.parseIngredients()
-        self.directions = self.parseDirections()
-        self.parseNutritionFacts()
-        self.parseGeneralInfo()
+        self.ingredients = self.parseIngredients(recipePage)
+        self.directions = self.parseDirections(recipePage)
+        self.parseNutritionFacts(recipePage)
+        self.parseGeneralInfo(recipePage)
 
-    def parseGeneralInfo(self):
-        self.title = self.recipePage.find('h1', {'class': 'heading-content'}).text  # title
-        timeToMake = self.recipePage.find('section', {'class': 'recipe-meta-container'})
+    def parseGeneralInfo(self, recipePage):
+        self.title = recipePage.find('h1', {'class': 'heading-content'}).text  # title
+        timeToMake = recipePage.find('section', {'class': 'recipe-meta-container'})
 
         if timeToMake is not None:
             self.cookTime = timeToMake.find('div', {'class': 'recipe-meta-item-body'}).text.strip() if timeToMake.find('div',
@@ -121,8 +119,8 @@ class AllRecipeParserOldSite:
 
         return
 
-    def parseIngredients(self):
-        ingredientList = self.recipePage.findAll('li', {'class': 'ingredients-item'})
+    def parseIngredients(self,  recipePage):
+        ingredientList = recipePage.findAll('li', {'class': 'ingredients-item'})
 
         ingredients = []
         for ingredientItem in ingredientList:
@@ -135,8 +133,8 @@ class AllRecipeParserOldSite:
 
         return ingredients
 
-    def parseDirections(self):
-        directionList = self.recipePage.findAll('li', {'class': 'instructions-section-item'})
+    def parseDirections(self, recipePage):
+        directionList = recipePage.findAll('li', {'class': 'instructions-section-item'})
 
         directions = []
 
@@ -149,12 +147,12 @@ class AllRecipeParserOldSite:
         return directions
 
 
-    def parseNutritionFacts(self):
+    def parseNutritionFacts(self, recipePage):
         self.nutritionFacts = {}
 
-        nutRows = self.recipePage.findAll('div',{'class':'nutrition-row'})
+        nutRows = recipePage.findAll('div',{'class':'nutrition-row'})
 
-        caloriesAndServings = self.recipePage.find('div', {'class': 'nutrition-top'}).text.replace('\n', ' ').split(':')
+        caloriesAndServings = recipePage.find('div', {'class': 'nutrition-top'}).text.replace('\n', ' ').split(':')
 
         self.nutritionFacts['servingsPerRecipe'] = caloriesAndServings[1].split(' ')[1]
         self.nutritionFacts['calories'] = caloriesAndServings[2]
