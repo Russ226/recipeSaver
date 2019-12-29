@@ -1,3 +1,5 @@
+import json
+
 from RecipeDAL.Utilities.Exceptions.RecipeDalError import RecipeDalError
 
 
@@ -32,11 +34,11 @@ class RecipeSaverService:
             returnMessage['errorMessage'] = e
 
         finally:
-            returnMessage['recipe'] = newRecipe
+            returnMessage['recipe'] = json.dumps(newRecipe.__dict__)
             return returnMessage
 
 
-    def getfullRecipeById(self, id):
+    def getFullRecipeByTitle(self, recipeTitle):
         returnMessage = {
             'isError': False,
             'errorMessage': '',
@@ -45,7 +47,7 @@ class RecipeSaverService:
 
         recipe = None
         try:
-            self.recipeSaverDAL.getFullRecipeByTitle(id)
+            recipe = self.recipeSaverDAL.getFullRecipeByTitle(recipeTitle)
 
         except Exception as e:
             returnMessage['isError'] = True
