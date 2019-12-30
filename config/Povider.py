@@ -7,6 +7,7 @@ import pymysql
 from Parser.ParserFactory import ParserFactory
 from RecipeDAL.RecipeDAL import RecipeDAL
 from RecipeSaverService.RecipeSaverService import RecipeSaverService
+from RecipeSaverService.RecipeSearchService import RecipeSearchService
 from WebRequestor.WebRequestorFactory import WebRequestorFactory
 
 
@@ -46,5 +47,11 @@ class Provider:
     @classmethod
     def createRecipeSaverService(cls):
         cls.recipeSaverService = RecipeSaverService(cls.createRecipeDAL(), cls.createParserFactroy(), cls.createWebRequestorFactory())
+
+        return cls.recipeSaverService
+
+    @classmethod
+    def createRecipeSearchService(cls):
+        cls.recipeSearchService = RecipeSearchService(cls.createRecipeDAL())
 
         return cls.recipeSaverService
