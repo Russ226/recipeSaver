@@ -5,7 +5,7 @@ import unittest
 import pymysql
 
 from RecipeDAL.RecipeDAL import RecipeDAL
-from RecipeSaverService.RecipeSearchService import RecipeSearchService
+from RestApi.src.RecipeSaverService import RecipeSearchService
 
 
 class RecipeSaverServiceTests(unittest.TestCase):

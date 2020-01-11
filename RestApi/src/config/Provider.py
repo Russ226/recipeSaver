@@ -4,11 +4,11 @@ import os
 
 import pymysql
 
-from Parser.ParserFactory import ParserFactory
+from RecipeParser.src.Parser.ParserFactory import ParserFactory
 from RecipeDAL.RecipeDAL import RecipeDAL
 from RecipeSaverService.RecipeSaverService import RecipeSaverService
 from RecipeSaverService.RecipeSearchService import RecipeSearchService
-from WebRequestor.WebRequestorFactory import WebRequestorFactory
+from RecipeParser.src.WebRequestor.WebRequestorFactory import WebRequestorFactory
 
 
 class Provider:

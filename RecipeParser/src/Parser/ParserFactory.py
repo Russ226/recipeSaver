@@ -1,4 +1,5 @@
-from Parser.AllRecipe import AllRecipeParser
+from RecipeParser.src.Parser.AllRecipe import AllRecipeParser
+
 
 # pass soup obj(s) to parse depending on the website some recipes might a different nutrition
 class ParserFactory:

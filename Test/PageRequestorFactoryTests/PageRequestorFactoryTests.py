@@ -3,7 +3,7 @@ import unittest
 import requests
 from bs4 import BeautifulSoup
 
-from WebRequestor import WebRequestorFactory
+from RecipeParser.src.WebRequestor import WebRequestorFactory
 
 headers = {
     "user-agent": "ozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.149 Safari/537.36"

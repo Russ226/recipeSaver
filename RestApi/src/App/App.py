@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 
-from WebLayer.Controllers.RecipeController import RecipeController
+from RestApi.src.Controllers import RecipeController
 
 
 def create_app():

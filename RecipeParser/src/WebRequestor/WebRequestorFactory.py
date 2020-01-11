@@ -1,6 +1,6 @@
 from urllib.parse import urlparse
 
-from WebRequestor.AllRecipePageRequestor import AllRecipePageRequestor
+from RecipeParser.src.WebRequestor.AllRecipePageRequestor import AllRecipePageRequestor
 
 
 class WebRequestorFactory:

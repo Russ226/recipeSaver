@@ -4,10 +4,10 @@ import unittest
 
 import pymysql.cursors
 
-from Parser.ParserFactory import ParserFactory
+from RecipeParser.src.Parser.ParserFactory import ParserFactory
 from RecipeDAL.RecipeDAL import RecipeDAL
 from RecipeSaverService.RecipeSaverService import RecipeSaverService
-from WebRequestor. WebRequestorFactory import WebRequestorFactory
+from RecipeParser.src.WebRequestor.WebRequestorFactory import WebRequestorFactory
 
 
 class RecipeSaverServiceTests(unittest.TestCase):

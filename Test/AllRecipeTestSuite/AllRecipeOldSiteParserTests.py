@@ -5,7 +5,7 @@ from venv import logger
 
 from bs4 import BeautifulSoup
 import requests
-from Parser.AllRecipe.AllRecipeParser import AllRecipeParserOldSite
+from RecipeParser.src.Parser.AllRecipe.AllRecipeParser import AllRecipeParserOldSite
 
 headers = {
     "user-agent": "ozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.149 Safari/537.36"
