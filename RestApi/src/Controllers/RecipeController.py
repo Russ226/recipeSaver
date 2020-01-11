@@ -1,6 +1,6 @@
 from flask import make_response, jsonify, request
 from flask.views import MethodView
-from config.Povider import Provider
+from RestApi.src.config.Provider import Provider
 
 
 class RecipeController(MethodView):

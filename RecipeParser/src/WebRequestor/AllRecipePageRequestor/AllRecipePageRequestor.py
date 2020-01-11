@@ -1,4 +1,4 @@
-from WebRequestor import PageRequestor
+from RecipeParser.src.WebRequestor import PageRequestor
 
 
 class AllRecipePageRequestor(PageRequestor.PageRequestor):
