@@ -14,9 +14,9 @@ class RecipeDAL:
 
     def saveNewRecipeGeneralInfo(self, recipe):
 
-
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
 
 
             with sqlConnection.cursor() as cursor:
@@ -38,9 +38,9 @@ class RecipeDAL:
 
         if recipeId is None and recipeTitle is None:
             raise InvalidRecipeSchema('recipeId and recipeTile cannot be None please provide one or the other')
-
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
 
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.saveIngredientProc(), (ingredient, recipeId, recipeTitle))
@@ -60,9 +60,9 @@ class RecipeDAL:
 
         if recipeId is None and recipeTitle is None:
             raise InvalidRecipeSchema('recipeId and recipeTile cannot be None please provide one or the other')
-
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
 
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.saveDirectionProc(), (directionStepNumber, directionText, recipeId, recipeTitle))
@@ -83,9 +83,9 @@ class RecipeDAL:
 
         if recipeId is None and recipeTitle is None:
             raise InvalidRecipeSchema('recipeId and recipeTile cannot be None please provide one or the other')
-
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
 
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.saveNutitionProc(), (nutritionName, nutritionAmount,
@@ -136,8 +136,9 @@ class RecipeDAL:
     def getRecipeGeneralByTitle(self, recipeTitle):
 
         result = None
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.getRecipeByTitleProc(), (recipeTitle))
                 result = cursor.fetchone()
@@ -154,8 +155,9 @@ class RecipeDAL:
     def getRecipeIngredientsByRecipeId(self, recipeId):
 
         result = None
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.getIngredientForRecipeProc(), (recipeId))
                 result = cursor.fetchall()
@@ -172,8 +174,9 @@ class RecipeDAL:
     def getRecipeDirectionsByRecipeId(self, recipeId):
 
         result = None
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.getDirectionsForRecipeProc(), (recipeId))
                 result = cursor.fetchall()
@@ -190,8 +193,9 @@ class RecipeDAL:
     def getRecipeNutritionalFactsByRecipeId(self, recipeId):
 
         result = None
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.getNutritionForRecipeProc(), (recipeId))
                 result = cursor.fetchall()
@@ -221,8 +225,8 @@ class RecipeDAL:
 
     def searchRecipeByTitle(self, recipeTitle):
         result = None
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.getSearchByRecipeTitleProc(), (recipeTitle))
                 result = cursor.fetchall()
