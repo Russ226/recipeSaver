@@ -31,7 +31,7 @@ class RecipeSaverService:
 
         except Exception as e:
             returnMessage['isError'] = True
-            returnMessage['errorMessage'] = e
+            returnMessage['errorMessage'] = str(e)
 
         finally:
 
@@ -53,7 +53,7 @@ class RecipeSaverService:
 
         except Exception as e:
             returnMessage['isError'] = True
-            returnMessage['errorMessage'] = e
+            returnMessage['errorMessage'] = str(e)
 
         finally:
             returnMessage['recipe'] = recipe

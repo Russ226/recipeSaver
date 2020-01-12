@@ -26,7 +26,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -49,7 +49,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new ingredient {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new ingredient {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -71,7 +71,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new direction {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new direction {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -95,7 +95,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new nutrition fact {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new nutrition fact {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -144,7 +144,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -162,7 +162,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -180,7 +180,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -198,7 +198,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -229,7 +229,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {str(e)}')
 
         finally:
             sqlConnection.close()

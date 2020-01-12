@@ -17,7 +17,7 @@ class RecipeSearchService:
 
         except Exception as e:
             returnMessage['isError'] = True
-            returnMessage['errorMessage'] = e
+            returnMessage['errorMessage'] = str(e)
 
         finally:
             returnMessage['result'] = recipes
