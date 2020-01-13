@@ -49,7 +49,7 @@ class RecipeSaverService:
 
         recipe = None
         try:
-            recipe = self.recipeSaverDAL.getFullRecipeByTitle(recipeTitle.__dict__)
+            recipe = self.recipeSaverDAL.getFullRecipeByTitle(recipeTitle)
 
         except Exception as e:
             returnMessage['isError'] = True
