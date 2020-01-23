@@ -210,15 +210,16 @@ class RecipeDAL:
 
 
     def getFullRecipeByTitle(self, recipeTitle):
-        recipe = None
+
 
         recipe = self.getRecipeGeneralByTitle(recipeTitle)
 
-        recipe['ingredients'] = self.getRecipeIngredientsByRecipeId(recipe['id'])
+        if recipe is not None:
+            recipe['ingredients'] = self.getRecipeIngredientsByRecipeId(recipe['id'])
 
-        recipe['directions'] = self.getRecipeDirectionsByRecipeId(recipe['id'])
+            recipe['directions'] = self.getRecipeDirectionsByRecipeId(recipe['id'])
 
-        recipe['nutritionFacts'] = self.getRecipeNutritionalFactsByRecipeId(recipe['id'])
+            recipe['nutritionFacts'] = self.getRecipeNutritionalFactsByRecipeId(recipe['id'])
 
         return recipe
 
