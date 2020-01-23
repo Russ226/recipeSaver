@@ -14,9 +14,9 @@ class RecipeDAL:
 
     def saveNewRecipeGeneralInfo(self, recipe):
 
-
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
 
 
             with sqlConnection.cursor() as cursor:
@@ -26,7 +26,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -38,9 +38,9 @@ class RecipeDAL:
 
         if recipeId is None and recipeTitle is None:
             raise InvalidRecipeSchema('recipeId and recipeTile cannot be None please provide one or the other')
-
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
 
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.saveIngredientProc(), (ingredient, recipeId, recipeTitle))
@@ -49,7 +49,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new ingredient {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new ingredient {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -60,9 +60,9 @@ class RecipeDAL:
 
         if recipeId is None and recipeTitle is None:
             raise InvalidRecipeSchema('recipeId and recipeTile cannot be None please provide one or the other')
-
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
 
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.saveDirectionProc(), (directionStepNumber, directionText, recipeId, recipeTitle))
@@ -71,7 +71,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new direction {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new direction {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -83,9 +83,9 @@ class RecipeDAL:
 
         if recipeId is None and recipeTitle is None:
             raise InvalidRecipeSchema('recipeId and recipeTile cannot be None please provide one or the other')
-
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
 
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.saveNutitionProc(), (nutritionName, nutritionAmount,
@@ -95,7 +95,7 @@ class RecipeDAL:
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new nutrition fact {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new nutrition fact {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -136,15 +136,16 @@ class RecipeDAL:
     def getRecipeGeneralByTitle(self, recipeTitle):
 
         result = None
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.getRecipeByTitleProc(), (recipeTitle))
                 result = cursor.fetchone()
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -154,15 +155,16 @@ class RecipeDAL:
     def getRecipeIngredientsByRecipeId(self, recipeId):
 
         result = None
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.getIngredientForRecipeProc(), (recipeId))
                 result = cursor.fetchall()
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -172,15 +174,16 @@ class RecipeDAL:
     def getRecipeDirectionsByRecipeId(self, recipeId):
 
         result = None
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.getDirectionsForRecipeProc(), (recipeId))
                 result = cursor.fetchall()
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -190,15 +193,16 @@ class RecipeDAL:
     def getRecipeNutritionalFactsByRecipeId(self, recipeId):
 
         result = None
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
+
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.getNutritionForRecipeProc(), (recipeId))
                 result = cursor.fetchall()
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {str(e)}')
 
         finally:
             sqlConnection.close()
@@ -221,15 +225,15 @@ class RecipeDAL:
 
     def searchRecipeByTitle(self, recipeTitle):
         result = None
+        sqlConnection = pymysql.connect(**self.dbConfig)
         try:
-            sqlConnection = pymysql.connect(**self.dbConfig)
             with sqlConnection.cursor() as cursor:
                 cursor.execute(StoredProcs.getSearchByRecipeTitleProc(), (recipeTitle))
                 result = cursor.fetchall()
 
         except Exception as e:
             sqlConnection.rollback()
-            raise RecipeDalError(f'an error has occured while an inserting a new recipe {e}')
+            raise RecipeDalError(f'an error has occured while an inserting a new recipe {str(e)}')
 
         finally:
             sqlConnection.close()

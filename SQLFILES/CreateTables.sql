@@ -1,7 +1,6 @@
-CREATE SCHEMA IF NOT EXISTS RecipeDb; 
-USE RecipeDB;
+USE recipesdb;
 
-CREATE TABLE IF NOT EXISTS RecipeDb.recipes(
+CREATE TABLE IF NOT EXISTS recipesdb.recipes(
   id INT NOT NULL AUTO_INCREMENT,
   title VARCHAR(50) NOT NULL,
   servings INT,
@@ -13,7 +12,7 @@ CREATE TABLE IF NOT EXISTS RecipeDb.recipes(
   
 );
 
-CREATE TABLE IF NOT EXISTS RecipeDb.ingredients(
+CREATE TABLE IF NOT EXISTS recipesdb.ingredients(
   id INT NOT NULL AUTO_INCREMENT,
   recipe_id INT NOT NULL,
   ingredientName VARCHAR(255),
@@ -21,7 +20,7 @@ CREATE TABLE IF NOT EXISTS RecipeDb.ingredients(
   foreign key (recipe_id) REFERENCES recipes(id)
 );
 
-CREATE TABLE IF NOT EXISTS RecipeDb.directions(
+CREATE TABLE IF NOT EXISTS recipesdb.directions(
   id INT NOT NULL AUTO_INCREMENT,
   recipe_id INT NOT NULL,
   directionText TEXT,
@@ -30,7 +29,7 @@ CREATE TABLE IF NOT EXISTS RecipeDb.directions(
   foreign key (recipe_id) REFERENCES recipes(id)
 );
 
-CREATE TABLE IF NOT EXISTS RecipeDb.nutrition(
+CREATE TABLE IF NOT EXISTS recipesdb.nutrition(
   id INT NOT NULL AUTO_INCREMENT,
   recipe_id INT NOT NULL,
   nutrientName VARCHAR(255),

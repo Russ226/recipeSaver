@@ -23,7 +23,7 @@ class PageRequestorFactoryTests(unittest.TestCase):
 
 
     def test_requestAllRecipePages(self):
-        webFactory = WebRequestorFactory.WebRequestorFactory('https://www.allrecipes.com/recipe/10813/best-chocolate-chip-cookies/')
-        allRecipePages = webFactory.requestSoupPage()
+        webFactory = WebRequestorFactory.WebRequestorFactory()
+        allRecipePages = webFactory.requestSoupPage('https://www.allrecipes.com/recipe/10813/best-chocolate-chip-cookies/')
 
         self.assertTrue(allRecipePages['recipePage'].find('body')['ng-app'], self.recipeSoup.find('body')['ng-app'])
