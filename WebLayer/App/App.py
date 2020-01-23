@@ -1,3 +1,6 @@
+from os import sys, path
+sys.path.append('/home/russ/recipeApp/recipeSaver/')
+
 import os
 from flask import Flask
 

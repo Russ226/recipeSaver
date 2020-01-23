@@ -56,9 +56,10 @@ class AllRecipeParserFactoryTests(unittest.TestCase):
         self.recipeParsers = []
 
         for recipeSoup in recipeSoups:
-            recipeParser = AllRecipeFactory(recipeSoup[0], recipeSoup[1])
+            recipeParser = AllRecipeFactory()
+            result = recipeParser.getAllRecipeParser(recipeSoup[0], recipeSoup[1])
 
-            self.recipeParsers.append(recipeParser.getAllRecipeParser())
+            self.recipeParsers.append(result)
 
 
     def test_parse_ingredients(self):

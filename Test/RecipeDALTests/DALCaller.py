@@ -13,7 +13,7 @@ class DALRunner:
 
         self.testData = json.loads(testData)
 
-        with open(os.path.join(os.path.dirname(__file__), 'TestData/DbConfig.json'), 'r') as testData:
+        with open(os.path.join(os.path.dirname(__file__), 'TestData/DbTestConfig.json'), 'r') as testData:
             config = testData.read()
 
         self.config = json.loads(config)

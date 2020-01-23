@@ -31,7 +31,7 @@ class RecipeSaverService:
 
         except Exception as e:
             returnMessage['isError'] = True
-            returnMessage['errorMessage'] = e
+            returnMessage['errorMessage'] = str(e)
 
         finally:
 
@@ -49,11 +49,11 @@ class RecipeSaverService:
 
         recipe = None
         try:
-            recipe = self.recipeSaverDAL.getFullRecipeByTitle(recipeTitle.__dict__)
+            recipe = self.recipeSaverDAL.getFullRecipeByTitle(recipeTitle)
 
         except Exception as e:
             returnMessage['isError'] = True
-            returnMessage['errorMessage'] = e
+            returnMessage['errorMessage'] = str(e)
 
         finally:
             returnMessage['recipe'] = recipe
