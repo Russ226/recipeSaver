@@ -1,5 +1,5 @@
 { "bakedChickenThighs": {
-    "recipeTitle": "Crispy and Tender Baked Chicken Thighs",
+    "title": "Crispy and Tender Baked Chicken Thighs",
     "servings": 24,
     "cookTime": "1 hr",
     "prepTime": "10 mins",
@@ -45,7 +45,7 @@
       }
     },
     "chocolateChipCookies": {
-      "recipeTitle": "Best Chocolate Chip Cookies",
+      "title": "Best Chocolate Chip Cookies",
       "servings": 8,
       "cookTime": "PT10M",
       "prepTime": "PT20M",

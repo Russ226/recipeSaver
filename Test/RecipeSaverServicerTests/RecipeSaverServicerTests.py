@@ -18,7 +18,7 @@ class RecipeSaverServiceTests(unittest.TestCase):
 
         self.testData = json.loads(testData)["chocolateChipCookies"]
 
-        with open(os.path.join(os.path.dirname(__file__), 'TestData/DbConfig.json'), 'r') as testData:
+        with open(os.path.join(os.path.dirname(__file__), 'TestData/DbTestConfig.json'), 'r') as testData:
             config = testData.read()
 
         self.config = json.loads(config)
@@ -34,29 +34,29 @@ class RecipeSaverServiceTests(unittest.TestCase):
         self.recipeSaverService = RecipeSaverService(self.recipeDAL, self.recipeParserFactory, self.webRequestorFactory)
 
         result = self.recipeSaverService.saveRecipe('https://www.allrecipes.com/recipe/10813/best-chocolate-chip-cookies/')
-        recipe = result['newRecipe']
-        self.assertTrue(result['isError'], False)
+        recipe = result['recipe']
+        self.assertFalse(result['isError'])
 
 
-        for ing in recipe.ingredients:
+        for ing in recipe['ingredients']:
             self.assertTrue(ing in self.testData["ingredients"], True)
 
 
         counter = 0
-        for dire in recipe.directions:
+        for dire in recipe['directions']:
             self.assertTrue(dire, self.testData["directions"][counter])
             counter += 1
 
 
-        self.assertTrue(self.testData["recipeTitle"], recipe.title)
-        self.assertTrue(self.testData["cookTime"], recipe.cookTime)
-        self.assertTrue(self.testData["prepTime"], recipe.prepTime)
-        self.assertTrue(self.testData["totalTime"], recipe.totalTime)
+        self.assertTrue(self.testData["recipeTitle"], recipe['title'])
+        self.assertTrue(self.testData["cookTime"], recipe['cookTime'])
+        self.assertTrue(self.testData["prepTime"], recipe['prepTime'])
+        self.assertTrue(self.testData["totalTime"], recipe['totalTime'])
 
     ## needs to be fixed
 
         for key, amount in self.testData["nutritionFacts"].items():
-            self.assertTrue(recipe.nutritionFacts[key][0], amount)
+            self.assertTrue(recipe["nutritionFacts"][key][0], amount)
 
 if __name__ == '__main__':
     unittest.main()
