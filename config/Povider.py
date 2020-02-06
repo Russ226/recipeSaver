@@ -19,7 +19,7 @@ class Provider:
         ## read json db file
 
 
-        with open(os.path.join(os.path.dirname(__file__), 'DbProdConfig.json'), 'r') as testData:
+        with open(os.path.join(os.path.dirname(__file__), 'DbConfig.json'), 'r') as testData:
             config = testData.read()
 
         cls.config = json.loads(config)
