@@ -4,7 +4,7 @@ sys.path.append('/home/russ/recipeApp/recipeSaver/')
 import os
 from flask import Flask
 
-from WebLayer.Controllers.RecipeController import RecipeController
+from WebLayer.Controllers.SearchRecipeController import RecipeController
 
 
 def create_app():
