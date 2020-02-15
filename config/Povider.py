@@ -54,4 +54,4 @@ class Provider:
     def createRecipeSearchService(cls):
         cls.recipeSearchService = RecipeSearchService(cls.createRecipeDAL())
 
-        return cls.recipeSaverService
+        return cls.recipeSearchService
