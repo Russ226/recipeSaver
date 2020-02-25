@@ -1,0 +1,10 @@
+USE recipeDB;
+
+CREATE TABLE IF NOT EXISTS recipedb.errorLog(
+  id INT NOT NULL AUTO_INCREMENT,
+  errorMessage VARCHAR(255) NOT NULL,
+  className VARCHAR(255),
+  methodName VARCHAR(255),
+  created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(id)
+);
