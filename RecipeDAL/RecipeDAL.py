@@ -2,7 +2,7 @@ import pymysql.cursors
 
 from RecipeDAL.Utilities.Exceptions.InvalidRecipeSchema import InvalidRecipeSchema
 from RecipeDAL.Utilities.Exceptions.RecipeDalError import RecipeDalError
-from .Utilities import StoredProcs
+from .Utilities import RecipeStoredProcs
 
 class RecipeDAL:
     def __init__(self, **kwargs):
@@ -20,8 +20,8 @@ class RecipeDAL:
 
 
             with sqlConnection.cursor() as cursor:
-                cursor.execute(StoredProcs.saveRecipeProc(), (recipe.title, recipe.nutritionFacts['servingsPerRecipe'],
-                                                              recipe.cookTime, recipe.prepTime, recipe.totalTime))
+                cursor.execute(RecipeStoredProcs.saveRecipeProc(), (recipe.title, recipe.nutritionFacts['servingsPerRecipe'],
+                                                                    recipe.cookTime, recipe.prepTime, recipe.totalTime))
                 sqlConnection.commit()
 
         except Exception as e:
@@ -43,7 +43,7 @@ class RecipeDAL:
 
 
             with sqlConnection.cursor() as cursor:
-                cursor.execute(StoredProcs.saveIngredientProc(), (ingredient, recipeId, recipeTitle))
+                cursor.execute(RecipeStoredProcs.saveIngredientProc(), (ingredient, recipeId, recipeTitle))
 
             sqlConnection.commit()
 
@@ -65,7 +65,7 @@ class RecipeDAL:
 
 
             with sqlConnection.cursor() as cursor:
-                cursor.execute(StoredProcs.saveDirectionProc(), (directionStepNumber, directionText, recipeId, recipeTitle))
+                cursor.execute(RecipeStoredProcs.saveDirectionProc(), (directionStepNumber, directionText, recipeId, recipeTitle))
 
             sqlConnection.commit()
 
@@ -88,8 +88,8 @@ class RecipeDAL:
 
 
             with sqlConnection.cursor() as cursor:
-                cursor.execute(StoredProcs.saveNutitionProc(), (nutritionName, nutritionAmount,
-                                                                nutritionUnit, recipeId, recipeTitle))
+                cursor.execute(RecipeStoredProcs.saveNutitionProc(), (nutritionName, nutritionAmount,
+                                                                      nutritionUnit, recipeId, recipeTitle))
 
             sqlConnection.commit()
 
@@ -140,7 +140,7 @@ class RecipeDAL:
         try:
 
             with sqlConnection.cursor() as cursor:
-                cursor.execute(StoredProcs.getRecipeByTitleProc(), (recipeTitle))
+                cursor.execute(RecipeStoredProcs.getRecipeByTitleProc(), (recipeTitle))
                 result = cursor.fetchone()
 
         except Exception as e:
@@ -159,7 +159,7 @@ class RecipeDAL:
         try:
 
             with sqlConnection.cursor() as cursor:
-                cursor.execute(StoredProcs.getIngredientForRecipeProc(), (recipeId))
+                cursor.execute(RecipeStoredProcs.getIngredientForRecipeProc(), (recipeId))
                 result = cursor.fetchall()
 
         except Exception as e:
@@ -178,7 +178,7 @@ class RecipeDAL:
         try:
 
             with sqlConnection.cursor() as cursor:
-                cursor.execute(StoredProcs.getDirectionsForRecipeProc(), (recipeId))
+                cursor.execute(RecipeStoredProcs.getDirectionsForRecipeProc(), (recipeId))
                 result = cursor.fetchall()
 
         except Exception as e:
@@ -197,7 +197,7 @@ class RecipeDAL:
         try:
 
             with sqlConnection.cursor() as cursor:
-                cursor.execute(StoredProcs.getNutritionForRecipeProc(), (recipeId))
+                cursor.execute(RecipeStoredProcs.getNutritionForRecipeProc(), (recipeId))
                 result = cursor.fetchall()
 
         except Exception as e:
@@ -229,7 +229,7 @@ class RecipeDAL:
         sqlConnection = pymysql.connect(**self.dbConfig)
         try:
             with sqlConnection.cursor() as cursor:
-                cursor.execute(StoredProcs.getSearchByRecipeTitleProc(), (recipeTitle))
+                cursor.execute(RecipeStoredProcs.getSearchByRecipeTitleProc(), (recipeTitle))
                 result = cursor.fetchall()
 
         except Exception as e:
